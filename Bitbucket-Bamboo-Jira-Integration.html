@@ -85,89 +85,39 @@
                         <div class="mb-4">
                             <h2 class="pt-2 tm-color-primary tm-post-title">Bitbucket, Bamboo and Jira Integration</h2>
                             <p class="tm-mb-40">16 November, 2020. Posted by Jerry Wang</p>
-                            <p>
-                                This document provides instructions on how to setup log monitoring to monitor Jade Data Pump Status. 
-                                Following software is required to successfully run this solution.
-                                <br><br>
-                                &nbsp&nbsp&nbsp&nbsp1.	&nbspNagios Core with Check_NRPE plugin installed.
-                                <br>
-                                &nbsp&nbsp&nbsp&nbsp2.&nbsp	NSClient++ v0.5.2.35 installed on the Windows Server.
-                                <br>
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   a.	When installing the NSClient++ choose the full installation with No Security option and setup a password to help you login later to web UI.
-                                
-                           
-                            <img src="img/img-03.jpg" alt="Image" class="img-fluid"> 
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   b.
+                            <p >
+                            Jira,&nbspBitbucket,&nbspBamboo&nbspIntegration<br>
+                            This&nbspdocument&nbspis&nbspbased&nbspon&nbspJira&nbspsoftware,&nbspbitbucket&nbspserver&nbspand&nbspbamboo&nbspserver,&nbspmay&nbspnot&nbspapplied&nbspto&nbspJira/bitbucket/bamboo&nbspcloud.
+                            <br>How?<br>Pre-requisite:&nbspSystem&nbspadmin&nbspaccess&nbspto&nbspall&nbspthese&nbspAtlassian&nbspproducts&nbspis&nbspneeded.&nbsp<br><br>
+                            <img src="img/img-07.jpg" alt="Image" class="img-fluid"> 
+                            Jira:<br>Settings&nbsp–&nbspApplications&nbsp–&nbspIntegrations&nbsp–&nbspApplication&nbsplinks
+                            <img src="img/img-08.jpg" alt="Image" class="img-fluid"> 
+                            <br><br><br>Bitbucket:<br>Settings&nbsp–&nbspApplication&nbsplinks
+                            <img src="img/img-09.jpg" alt="Image" class="img-fluid"> <br><br>Bamboo:
+                            <br>Settings&nbsp–&nbspmanage&nbspapps&nbsp–&nbspApplication
+                            <img src="img/img-10.jpg" alt="Image" class="img-fluid"> <br>
+                            <br>A&nbspquick&nbspway…
+                            <img src="img/img-11.jpg" alt="Image" class="img-fluid"> 
+                            <br>Just&nbspas&nbspa&nbspquick&nbspway&nbspto&nbspcheck&nbspif&nbspthe&nbspintegration&nbsphas&nbspbeen&nbspset&nbspup&nbspproperly,&nbspgo&nbspto&nbsptop&nbspleft&nbspcorner&nbspof&nbspeach&nbspapplication,&nbspsee&nbspif&nbspyou&nbspcan&nbspsee&nbspthe&nbsplink&nbspjumped&nbspto&nbspother&nbspproduct.&nbspIf&nbspyes,&nbspit&nbspmeans&nbspyou’re&nbspgood&nbspto&nbspgo!<br>
+                            <br>Trouble&nbspshoot:&nbsp<br>Jira&nbspneeded&nbspto&nbspbe&nbspintegrated&nbspwith&nbspdevelopment&nbsp
+                            <br>Jira&nbsp–&nbspBitbucket&nbspIntegration<br>What&nbspcan&nbspit&nbspdo?<br>Lots&nbspof&nbspthings!<br>View&nbspJira&nbspissues&nbspin&nbspproduct
+                            <br>Edit&nbspJira&nbspissues&nbspin&nbspproduct<br>Transition&nbspJira&nbspissues&nbspin&nbspproduct<br>View&nbspbranches&nbsprelated&nbspto&nbspissues&nbspin&nbspJira
+                            <br>View&nbspCommits&nbsprelated&nbspto&nbspissues&nbspin&nbspJira<br>View&nbsppull&nbsprequests&nbsprelated&nbspto&nbspissues&nbspin&nbspJira<br>Transition&nbspJira&nbspissues&nbspwith&nbspsmart&nbspcommit&nbspmessages
+                            <br>Transition&nbspJira&nbspissues&nbspwhen&nbspcreating&nbspa&nbspcommit<br>Comment&nbspon&nbspJira&nbspissues&nbspwith&nbspcommit&nbspmessages<br>And&nbspmore…&nbsp
+                            <br>https://www.atlassian.com/software/jira/bitbucket-integration<br>Test&nbspCases<br>Workflow&nbsptriggers&nbspin&nbspJIRA<br>Settings&nbsp–&nbspissue&nbsp–&nbspworkflows&nbsp–&nbspedit
+                            <img src="img/img-12.jpg" alt="Image" class="img-fluid"> 
+                            <br><br>As&nbspan&nbspexample,&nbspthis&nbsptrigger&nbspis&nbspset&nbspto&nbsp‘start&nbspprogress’&nbspfor&nbsp‘branch&nbspcreated’,&nbspthat&nbspmeans&nbsponce&nbspa&nbspbranch&nbspis&nbspcreated&nbsp(either&nbspin&nbspJira&nbspdevelopment&nbsppanel&nbspor&nbspbitbucket),&nbspthe&nbspJira&nbspissue&nbspwill&nbspbe&nbspmarked&nbspas&nbsp‘in&nbspprogress’&nbspautomatically.&nbsp
+                            <img src="img/img-13.jpg" alt="Image" class="img-fluid"> 
+                            <img src="img/img-14.jpg" alt="Image" class="img-fluid"> 
                             <br>
-                            <img src="img/img-04.jpg" alt="Image" class="img-fluid">
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   c.
-                            <br>
-                            <img src="img/img-05.jpg" alt="Image" class="img-fluid">
-                        
-                            <br>
-                            
-                            &nbsp&nbsp&nbsp&nbsp3.	After these two are done, place the given python file in C:\Program Files\NSClient++\scripts\python\ on Windows server. If no python file was provided, create a new file under C:\Program Files\NSClient++\scripts\python with name check_logs.py and add the following to the file.
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspa.	Change the dir = "C:/Test/jommsg" to something where the actual log files are. Note: here jommsg is the start of log file (jommsg98.log). If the log file has a different name, please use that name excluding the last umbers in the file name.
+                            <br>Trouble&nbspshoot:&nbsp<br>Jira&nbspneeded&nbspto&nbspbe&nbspintegrated&nbspwith&nbspdevelopment&nbsptools&nbspin&nbsporder&nbspto&nbspadd&nbsptriggers&nbspin&nbspworkflow.&nbsp<br>Jira&nbsp–&nbspBamboo&nbspIntegration<br>Development&nbspinfo&nbspin&nbspissue&nbspsearch<br>Development&nbsppanel<br>Build&nbspresult&nbspdialog<br>Deployment&nbspdialog<br>Run&nbspBamboo&nbspbuilds&nbsp
+                            <br>Linked&nbspplan&nbspbranches&nbsp<br>Jira&nbspissues&nbspview&nbsp<br>Jira&nbspProjects&nbsp<br>
+                            Details&nbspcan&nbspbe&nbspfound&nbsphere&nbsphttps://confluence.atlassian.com/bamboo/integrating-bamboo-with-jira-applications-289276945.html<br>
+                            Bitbucket–&nbspBamboo&nbspIntegration<br>
+                            <br>https://confluence.atlassian.com/bamboo/integrating-bamboo-with-bitbucket-server-779302772.html&nbsp
+                            <br>key&nbspidea&nbspis,&nbspyou&nbspcan&nbsplink&nbspbamboo&nbspwith&nbspreposit&nbspory&nbspbranches,&nbsp<br>
 
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspb.	Close and save the file. Make sure the indentation is maintained. This is very important as python takes it very seriously.
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp4.	Now navigate to the NSClient++ installation directory and open nsclient.ini file with any text editor and add or replace existing with the following.
-                            <br>
-                            <b>Note: Change the Nagios core IP to actual IP address of your Nagios core.</b>
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspa.	Save and reboot the NSClient++ using the web UI (localhost:8443) or using some magic command :D 
-                            <br>
-                            <br>
-                            •	Now add the following to the commands.cfg on Nagios
-                            <br>
-                            define command {                                                                                                                                                                command_name    check_logs
-                            <br>   
-                            &nbsp&nbsp&nbsp&nbsp    command_line  &nbsp&nbsp&nbsp&nbsp  /usr/local/nagios/libexec/check_nrpe -H 10.0.0.4 -c check_log -n
-                            <br>
-                            }
-                            <br>
-                            OR    
-                            <br>
-                            command_line    /usr/local/nagios/libexec/check_nrpe -H 10.0.0.4 -c check_log -n
-                            <br>
-                            can be used directly when defining a service.
-                            <br>
-                            •	Then define a host and a service as usual. The following example will define a host and service. Place it in main configuration file of 
-                            <br>
-                            define host{
-                            <br>
-                            host_name                   winserverlog
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        alias                           	    winlog
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       address               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp          10.0.0.4
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       check_command        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp check-host-alive
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     check_interval            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   5
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp retry_interval             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   1
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  max_check_attempts &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 5
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  check_period              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  24x7
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp contacts                      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   nagiosadmin
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp notification_interval  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 60
-                                    <br>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp notification_period    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 24x7
-                                    <br>    
-                                }
-                            
-                            <br>
-                            
-                            •	Verify the configuration before restarting the Nagios Core to reflect changes using nagios –V flag.
-                            
-
-                        </p>
+                            </p>
                             <span class="d-block text-right tm-color-primary">Creative . IT . Life</span>
                         </div>
                         
